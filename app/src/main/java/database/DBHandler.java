@@ -42,7 +42,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void addInfo(String username, String dob, String password, String gender){
+    public long addInfo(String username, String dob, String password, String gender){
 
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
@@ -57,6 +57,8 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(UserProfile.User.TABLE_NAME, null, values);
+
+        return newRowId;
     }
 
     public boolean updateInfo(String username, String dob, String password, String gender){
@@ -171,10 +173,10 @@ public class DBHandler extends SQLiteOpenHelper {
             String password = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.User.COLUMN_NAME_PASSWORD));
             String gender = cursor.getString(cursor.getColumnIndexOrThrow(UserProfile.User.COLUMN_NAME_GENDER));
 
-            userInfo.add(userName); //1
-            userInfo.add(dob); //2
-            userInfo.add(password); //3
-            userInfo.add(gender); //4
+            userInfo.add(userName); //0
+            userInfo.add(dob); //1
+            userInfo.add(password); //2
+            userInfo.add(gender); //3
         }
         cursor.close();
 
@@ -182,7 +184,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     }
 
-    public void deleteInfo( String username ){
+    public int deleteInfo( String username ){
         SQLiteDatabase db = getWritableDatabase();
 
         // Define 'where' part of query.
@@ -192,7 +194,9 @@ public class DBHandler extends SQLiteOpenHelper {
         String[] selectionArgs = { username };
 
         // Issue SQL statement.
-        int deletedRows = db.delete(UserProfile.User.TABLE_NAME, selection, selectionArgs);
+        int deletedRow = db.delete(UserProfile.User.TABLE_NAME, selection, selectionArgs);
+
+        return  deletedRow;
 
     }
 

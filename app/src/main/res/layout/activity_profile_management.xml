@@ -87,10 +87,20 @@
             android:text="@string/female" />
 
         <Button
+            android:id="@+id/btnAddPM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#03A9F4"
+            android:text="@string/add" />
+
+        <Button
             android:id="@+id/btnUpdatePM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
-            android:text="@string/update" />
+            android:layout_margin="10dp"
+            android:background="#4DC652"
+            android:text="@string/update"
+            android:textColor="#FFFFFF" />
     </RadioGroup>
 </LinearLayout>
